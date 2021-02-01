@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<p>Angiv længde af flyrejse i timer</p>
+	<input type="text" id="flyrejse">
+	<button>Klik her og tjek Konsollen for svar!</button>
+
+	<script>
+		document.querySelector("button").addEventListener("click", buttonClicked);
+
+		function buttonClicked() {
+			let timer = document.querySelector("#flyrejse").value;
+			let result;
+			if (isNaN(timer)) {
+				result = "Skriv venligst et tal.";
+			} else {
+				result = calculateCo2(timer);
+			}
+			console.log(result);
+		}
+
+		function calculateCo2(timer) {
+			if (timer == undefined) {
+				return `Skriv venligst et antal timer.`
+			}
+			const co2Kg = timer * 109;
+			let respons;
+			if (co2Kg < 100) {
+				respons = "Tæt på Thunberg!";
+			} else if (co2Kg < 200) {
+				respons = "Ja ja, du behøver ikke at melde dig ud af Å!";
+			} else if (co2Kg < 600) {
+				respons = "Det er godt for turismen i Nordeuropa.";
+			} else
+				respons = "Nå ja, vi kan jo altid kolonisere Mars...";
+			let result = `Ved ${timer} timers flyrejse har du udledt ${co2Kg}kg CO2. ${respons}`;
+			return result;
+		}
+
+	</script>
+</body>
+
+</html>
