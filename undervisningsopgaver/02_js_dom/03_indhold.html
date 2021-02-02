@@ -49,6 +49,8 @@
 		const overskrift = document.querySelector("h1");
 		overskrift.textContent;
 		console.log(overskrift.textContent);
+		overskrift.textContent = "En ny overskrift!"
+		console.log(overskrift.textContent);
 
 		const undertitel = document.querySelector("h2");
 		undertitel.textContent;
@@ -68,25 +70,39 @@
 
 		const img1 = document.querySelector("#img1");
 		console.log(img1);
+		img1.src = "https://placeimg.com/480/480/nature";
+		img1.alt = "Her er et foto af noget natur!";
+		console.log(img1);
 
 		const img2 = document.querySelector("#img2");
+		console.log(img2);
+		img2.src = "https://placeimg.com/480/480/arch";
+		img2.alt = "Her er et foto af noget arkitektur!";
 		console.log(img2);
 
 		const h3_1 = document.querySelector("h3");
 		h3_1.textContent;
 		console.log(h3_1.textContent);
+		h3_1.textContent = "Ny overskrift til artikel 1.";
+		console.log(h3_1.textContent);
 
 		const article1_p = document.querySelector("article:nth-child(1) p")
 		article1_p.textContent;
+		console.log(article1_p.textContent);
+		article1_p.textContent = "Ny og spændende brødtekst til artikel 1!";
 		console.log(article1_p.textContent);
 
 		const h3_2 = document.querySelector("article:nth-child(2) h3");
 		h3_2.textContent;
 		console.log(h3_2.textContent);
+		h3_2.innerHTML = "Ny overskrift til artikel 2.";
+		console.log(h3_2.innerHTML);
 
 		const article2_p = document.querySelector("article:nth-child(2) p")
 		article2_p.textContent;
 		console.log(article2_p.textContent);
+		article2_p.innerHTML = "Ny og <b>spændende</b> brødtekst til artikel 2!";
+		console.log(article2_p.innerHTML);
 
 		const footer = document.querySelector("footer");
 		footer.textContent;
