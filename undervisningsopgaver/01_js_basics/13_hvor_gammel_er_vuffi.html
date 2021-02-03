@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<p>Hvor gammel er din hund? (angiv antal år)</p>
+	<input type="text" id="dogYears">
+	<p>Se din hunds alder ifølge den gamle og den nye beregning i konsollen.</p>
+	<button>Lad mig se!</button>
+
+	<script>
+		document.querySelector("button").addEventListener("click", buttonClicked);
+
+		function buttonClicked() {
+			const dogYears = document.querySelector("#dogYears").value;
+			let oldCalc = dogYears * 7;
+			let newCalc = Math.round(16 * Math.log(dogYears) + 31);
+
+			console.log(`Din hund på ${dogYears} hundeår er hhv. ${oldCalc} menneskeår ifg. den gamle og ${newCalc} menneskeår ifg. den nye beregningsmetode!`);
+		}
+
+	</script>
+</body>
+
+</html>
