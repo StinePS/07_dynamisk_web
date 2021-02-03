@@ -42,6 +42,7 @@
 	<footer>Dette er en footer</footer>
 
 	<script>
+		//Øvelse 5
 		document.addEventListener("DOMContentLoaded", siteLoaded);
 
 		function siteLoaded() {
@@ -115,7 +116,7 @@
 			console.log(footer.textContent);
 
 
-			//Øvelse 5
+			//Øvelse 4
 			//Nyt article-element
 			let newArticle = document.createElement("article");
 
@@ -126,6 +127,13 @@
 			let nyOText = document.createTextNode("Artikel 3");
 
 
+			//Create nyt billede og tilføj til article
+			let nyImg = document.createElement("img");
+			nyImg.src = "https://placeimg.com/480/480/tech";
+			nyImg.alt = "Her er et foto af noget tech!";
+			newArticle.appendChild(nyImg);
+
+			//Create ny overskrift
 			//Tilføj tekst til overskriften
 			nyOverskrift.appendChild(nyOText);
 
@@ -134,12 +142,6 @@
 
 			//Tilføj article til section
 			section.appendChild(newArticle);
-
-			//Samme som evenfor, nu med img
-			let nyImg = document.createElement("img");
-			nyImg.src = "https://placeimg.com/480/480/tech";
-			nyImg.alt = "Her er et foto af noget tech!";
-			newArticle.appendChild(nyImg);
 
 			//Samme som ovenfor, nu med p
 			let nyP = document.createElement("p");
