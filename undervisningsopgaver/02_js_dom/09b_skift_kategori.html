@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Titel</title>
+	<style>
+		img {
+			width: 100%;
+		}
+
+		section {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+			grid-gap: 1rem;
+		}
+
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1>Overskrift</h1>
+		<p>Her står lidt om sitet.</p>
+	</header>
+	<main>
+		<h2>Undertitel</h2>
+		<section>
+			<article>
+				<img id="img1" src="https://placeimg.com/480/480/animals" alt="Animal">
+				<h3>Article 1</h3>
+				<p>Cupcake ipsum dolor sit amet caramels bonbon. Dessert dragée chocolate cake bonbon chocolate bar chocolate. Soufflé ice cream pastry. Halvah cake lemon drops danish lollipop sesame snaps. Jelly-o carrot cake oat cake jujubes dessert. Jujubes cheesecake apple pie cake wafer cookie danish fruitcake croissant. Cupcake gummies apple pie carrot cake muffin jelly beans chocolate cake tiramisu cookie. Dessert halvah jelly marzipan. Cake topping caramels topping gingerbread</p>
+			</article>
+			<article>
+				<img id="img2" src="https://placeimg.com/480/480/animals" alt="Animal">
+				<h3>Article 2</h3>
+				<p>Candy canes chupa chups jelly beans lollipop caramels. Sugar plum cupcake jelly liquorice dessert liquorice halvah tootsie roll muffin. Chupa chups halvah halvah. Jelly-o chocolate wafer jujubes. Dragée carrot cake tart croissant candy canes tiramisu chocolate cake bonbon powder. Jelly lollipop pie brownie candy canes bear claw soufflé. Gummi bears sweet cake. Lollipop liquorice tiramisu candy jelly beans.</p>
+			</article>
+		</section>
+	</main>
+	<footer>Dette er en footer</footer>
+
+	<script>
+		//Øvelse 5
+		document.addEventListener("DOMContentLoaded", siteLoaded);
+
+		function siteLoaded() {
+			console.log("Site loaded");
+
+			//Øvelse 4
+			const header = document.querySelector("header");
+			header.textContent;
+			console.log(header.textContent);
+
+			const overskrift = document.querySelector("h1");
+			overskrift.textContent;
+			console.log(overskrift.textContent);
+			overskrift.textContent = "En ny overskrift!"
+			console.log(overskrift.textContent);
+
+			const undertitel = document.querySelector("h2");
+			undertitel.textContent;
+			console.log(undertitel.textContent);
+
+			const section = document.querySelector("section");
+			section.textContent;
+			console.log(section.textContent);
+
+			const article1 = document.querySelector("article");
+			article1.textContent;
+			console.log(article1.textContent);
+
+			const article2 = document.querySelector("article:nth-child(2)");
+			article2.textContent;
+			console.log(article2.textContent);
+
+			const img1 = document.querySelector("#img1");
+			console.log(img1);
+			img1.src = "https://placeimg.com/480/480/nature";
+			img1.alt = "Her er et foto af noget natur!";
+			console.log(img1);
+
+			const img2 = document.querySelector("#img2");
+			console.log(img2);
+			img2.src = "https://placeimg.com/480/480/arch";
+			img2.alt = "Her er et foto af noget arkitektur!";
+			console.log(img2);
+
+			const h3_1 = document.querySelector("h3");
+			h3_1.textContent;
+			console.log(h3_1.textContent);
+			h3_1.textContent = "Ny overskrift til artikel 1.";
+			console.log(h3_1.textContent);
+
+			const article1_p = document.querySelector("article:nth-child(1) p")
+			article1_p.textContent;
+			console.log(article1_p.textContent);
+			article1_p.textContent = "Ny og spændende brødtekst til artikel 1!";
+			console.log(article1_p.textContent);
+
+			const h3_2 = document.querySelector("article:nth-child(2) h3");
+			h3_2.textContent;
+			console.log(h3_2.textContent);
+			h3_2.innerHTML = "Ny overskrift til artikel 2.";
+			console.log(h3_2.innerHTML);
+
+			const article2_p = document.querySelector("article:nth-child(2) p")
+			article2_p.textContent;
+			console.log(article2_p.textContent);
+			article2_p.innerHTML = "Ny og <b>spændende</b> brødtekst til artikel 2!";
+			console.log(article2_p.innerHTML);
+
+			const footer = document.querySelector("footer");
+			footer.textContent;
+			console.log(footer.textContent);
+
+
+			//Øvelse 4
+			//Nyt article-element
+			let newArticle = document.createElement("article");
+
+			//Ny h3'er
+			let nyOverskrift = document.createElement("h3");
+
+			//Ny h3-tekst
+			let nyOText = document.createTextNode("Artikel 3");
+
+
+			//Create nyt billede og tilføj til article
+			let nyImg = document.createElement("img");
+			nyImg.src = "https://placeimg.com/480/480/tech";
+			nyImg.alt = "Her er et foto af noget tech!";
+			newArticle.appendChild(nyImg);
+
+			//Create ny overskrift
+			//Tilføj tekst til overskriften
+			nyOverskrift.appendChild(nyOText);
+
+			//Tilføj overskrift til article
+			newArticle.appendChild(nyOverskrift);
+
+			//Tilføj article til section
+			section.appendChild(newArticle);
+
+			//Samme som ovenfor, nu med p
+			let nyP = document.createElement("p");
+			let nyPText = document.createTextNode("Masser og masser af spændende og informativ tekst om den spritnye artikel 3!");
+			nyP.appendChild(nyPText);
+			newArticle.appendChild(nyP);
+		}
+
+		//Øvelse 6
+		document.querySelector("#img1").addEventListener("click", randomPhoto);
+
+		function randomPhoto() {
+			console.log(img1);
+			img1.src = "https://placeimg.com/480/480/any" + (Math.round(Math.random() * 9) + 1);
+			img1.alt = "Her er et foto af noget!";
+			console.log(img1);
+		}
+
+		//Øvelse 9b
+		const img2 = document.querySelector("#img2");
+		const category = ["animals", "arch", "people", "nature", "tech"];
+
+		img2.addEventListener("click", skift);
+
+		function skift() {
+			let number = Math.round(Math.random() * 4);
+			img2.src = "https:placeimg.com/480/480/" + category[number];
+			img2.alt = category[number];
+		}
+
+	</script>
+</body>
+
+</html>
