@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style>
+		img {
+			width: 25vw;
+		}
+
+	</style>
+</head>
+
+
+<body>
+	<article></article>
+	<script>
+		//Øvelse 2
+		document.addEventListener("DOMContentLoaded", siteLoaded);
+
+		function siteLoaded() {
+
+			let dyr = {
+				"navn": "Hubert",
+				"type": "pattedyr",
+				"billede": "https://stineplejdrup.dk/kea/02_web/02_html/kaeledyr/hubert.jpg",
+				"levested": "Islev"
+			}
+
+			const destination = document.querySelector("article");
+
+			destination.innerHTML = `Dyr: ${dyr.navn}, type: ${dyr.type}, levested: ${dyr.levested} <br/> <img src="${dyr.billede}">`;
+		}
+
+	</script>
+</body>
+
+</html>
