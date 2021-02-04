@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Slideshow</title>
+	<link rel="stylesheet" href="">
+</head>
+
+<body>
+	<h1>Tro på det...</h1>
+	<img src="img/img1.png" alt="billede 1">
+	<button>Videre</button>
+	<p>Billeder brugt med tilladelse af Rasmus Bregnhøi</p>
+
+	<script>
+		//array med alle billeder
+		let photos = ["img1.png", "img2.png", "img3.png", "img4.png", "img5.png", "img6.png", "img7.png", "img8.png"];
+
+		const button = document.querySelector("button");
+		const img = document.querySelector("img");
+		let number = 0;
+
+		button.addEventListener("click", changeImg);
+
+		//function til at skifte billede
+		function changeImg() {
+			img.src = "img/" + photos[number];
+			if (number < 7) {
+				number++;
+				button.textContent = "Videre";
+			} else {
+				button.textContent = "Forfra";
+				number = 0;
+			}
+
+
+		}
+
+	</script>
+</body>
+
+</html>
