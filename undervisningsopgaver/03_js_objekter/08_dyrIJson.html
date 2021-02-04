@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>08_dyrIJson</title>
+	<link rel="stylesheet" href="">
+	<style>
+		img {
+			width: 20vw;
+		}
+
+		article {
+			border-style: dashed;
+			padding-left: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		h3 {
+			font-size: 1.5rem;
+		}
+	</style>
+</head>
+
+
+<body>
+	<section></section>
+	<template>
+		<article>
+			<h3></h3>
+			<img src="" alt="">
+			<p class="type">Type: </p>
+			<p class="levested">Levested: </p>
+		</article>
+	</template>
+
+	<script>
+		const section = document.querySelector("section");
+		const dyreTemplate = document.querySelector("template");
+
+		const file = "08_dyrIJson.json";
+
+		async function getData(file) {
+			const result = await fetch(file);
+			const json = await result.json();
+			vis(json);
+		}
+
+		function vis(json) {
+
+			//løb listen af dyr igennem og indsæt data i en template
+			json.forEach(dyr => {
+				//placér dyr i klon af template og appendChild til section
+				let clone = dyreTemplate.cloneNode(true).content;
+				clone.querySelector("h3").textContent += dyr.navn;
+				clone.querySelector("img").src = dyr.billede;
+				clone.querySelector(".type").textContent += dyr.type;
+				clone.querySelector(".levested").textContent += dyr.levested;
+				section.appendChild(clone);
+			})
+		}
+		getData(file);
+	</script>
+</body></html>
