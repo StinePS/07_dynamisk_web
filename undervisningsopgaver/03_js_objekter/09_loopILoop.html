@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>09_loopILoop</title>
+	<link rel="stylesheet" href="">
+	<style>
+		img {
+			width: 20vw;
+		}
+
+		article {
+			border-style: dashed;
+			padding-left: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		h3 {
+			font-size: 1.5rem;
+		}
+	</style>
+</head>
+
+
+<body>
+	<section></section>
+	<template>
+		<article>
+			<h3></h3>
+			<p class="model">Model: </p>
+			<p class="år">År: </p>
+			<p class="km">Km: </p>
+			<p>Udstyr: </p>
+			<ul class="udstyr"></ul>
+		</article>
+	</template>
+
+	<script>
+		const section = document.querySelector("section");
+		const bilTemplate = document.querySelector("template");
+
+		const file = "09_loopILoop.json";
+
+		async function getData(file) {
+			const result = await fetch(file);
+			const json = await result.json();
+			vis(json);
+		}
+
+		function vis(json) {
+
+			//løb listen af biler igennem og indsæt data i template
+			json.forEach(bil => {
+				//placér bil i klon af template og appendChild til section
+				let clone = bilTemplate.cloneNode(true).content;
+				clone.querySelector("h3").textContent += bil.mærke;
+				clone.querySelector(".model").textContent += bil.model;
+				clone.querySelector(".år").textContent += bil.år;
+				clone.querySelector(".km").textContent += bil.km;
+				//loop i loop - List udstyret op
+				bil.udstyr.forEach(grej => {
+					clone.querySelector(".udstyr").innerHTML += "<li>" + grej + "</li>";
+				})
+				section.appendChild(clone);
+			})
+		}
+		getData(file);
+	</script>
+</body></html>

@@ -1,0 +1,22 @@
+[{
+		"mærke": "Kia",
+		"model": "Picanto",
+		"år": "2014",
+		"km": 81500,
+		"udstyr": ["Bakspejl", "Cykelholder", "Sædevarme"]
+			},
+	{
+		"mærke": "Mini",
+		"model": "Cabrio",
+		"år": "2020",
+		"km": 0,
+		"udstyr": ["LED-forlygter", "Piano black udstødning"]
+			},
+	{
+		"mærke": "Tesla",
+		"model": "S",
+		"år": "2018",
+		"km": 10000,
+		"udstyr": ["GPS", "Aircon", "Varme i sidespejle"]
+			}
+		]
