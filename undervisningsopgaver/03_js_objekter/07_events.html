@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>07_events</title>
+	<link rel="stylesheet" href="">
+	<style>
+		* {
+			margin: 0;
+		}
+
+		img {
+			width: 100%;
+		}
+
+		section {
+			max-width: 1200px;
+			margin: 0 auto;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+			grid-gap: 10px;
+		}
+
+	</style>
+</head>
+
+
+<body>
+	<section></section>
+	<template>
+		<article>
+			<img src="" alt="">
+			<h3></h3>
+			<p></p>
+		</article>
+	</template>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", visEvents);
+
+		let allEvents = [{
+			"url": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/W6dOqabNhHKBPXxxKKEZRA84-360.jpg",
+			"title": "A Calling",
+			"director": "Christian Bengtson",
+			"country": "Denmark",
+			"length": "20 min",
+			"year": "2019"
+		}, {
+			"url": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Q8K1pZrOs03Q0IrDkBwGVu5r-360.jpg",
+			"title": "A Hole In my Heart",
+			"director": "Mees Peijnenburg",
+			"country": "Holland",
+			"length": "9 min",
+			"year": "2015"
+		}, {
+			"url": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/hUd4SdGQ8I23ovxWnGtBz4Ck-360.jpg",
+			"title": "A Place In The Sun - 110 years after the genocide",
+			"director": "Christian Zipfel",
+			"country": "Tyskland",
+			"length": "20 min",
+			"year": "2018"
+		}, {
+			"url": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Zdt2ODEqSVOkNe8nUaSSu8kd-360.jpg",
+			"title": "A Tower Of Two",
+			"director": "Jacob Krzysztof Glogowski",
+			"country": "Danmark",
+			"length": "21 min",
+			"year": "2019"
+		}, {
+			"url": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/2iUOgQpixgIQCxyLtY6KiYuU-360.jpg",
+			"title": "A Worthy Man",
+			"director": "Kristian Håskjold",
+			"country": "Danmark",
+			"length": "19 min",
+			"year": "2018"
+		}]
+
+		function visEvents() {
+			console.log("visEvents");
+			const section = document.querySelector("section");
+			const eventTemplate = document.querySelector("template");
+
+			//løb listen af events igennem og indsæt data i en template
+			allEvents.forEach(event => {
+				//placér event i klon af template og appendChild til section
+				let clone = eventTemplate.cloneNode(true).content;
+				clone.querySelector("img").src = event.url;
+				clone.querySelector("h3").textContent += event.title;
+				clone.querySelector("p").textContent += `${event.director} | ${event.country} | ${event.length} | ${event.year}`;
+				section.appendChild(clone);
+			})
+
+		}
+
+	</script>
+</body>
+
+</html>
