@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>07_01_01_persongalleri</title>
+	<title>07_02_01_babushka</title>
 	<link rel="stylesheet" href="">
 	<style>
 		* {
@@ -39,35 +39,35 @@
 		h1 {
 			padding: 1rem;
 		}
-
 	</style>
 </head>
 
 <body>
 	<main>
-		<h1>Persongalleri</h1>
+		<h1>Bistro Babushka</h1>
 		<section></section>
 	</main>
 
 	<template>
 		<article>
 			<img src="" alt="">
-			<h2 class="name"></h2>
-			<p class="birthday">Født: </p>
-			<p class="title">Titel: </p>
-			<p class="hobby">Hobby: </p>
+			<h2 class="dish_name"></h2>
+			<p class="short_description"></p>
+			<p class="price">Pris: </p>
 		</article>
 	</template>
 
 	<script>
-		const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+		document.addEventListener("DOMContentLoaded", getData);
+
+		const url = "https://babushka-dd8a.restdb.io/rest/menu";
 		const options = {
 			headers: {
-				'x-apikey': "600fe9211346a1524ff12e31"
+				'x-apikey': "600ec2fb1346a1524ff12de4"
 			}
 		};
-		const medieurl = "https://persongalleri-5d3e.restdb.io/media/";
-		document.addEventListener("DOMContentLoaded", getData);
+		const medieurl = "https://babushka-dd8a.restdb.io/media/";
+
 		async function getData() {
 			const response = await fetch(url, options);
 			const json = await response.json();
@@ -75,25 +75,20 @@
 		}
 
 		const section = document.querySelector("section");
-		const personTemplate = document.querySelector("template").content;
+		const dishTemplate = document.querySelector("template").content;
 
 
 		function show(json) {
 			console.log(json);
 
-			json.forEach(person => {
-				const clone = personTemplate.cloneNode(true);
-				clone.querySelector("img").src = medieurl + person.billede[0];
-				clone.querySelector(".name").textContent = `${person.fornavn} ${person.efternavn}`;
-				const date = new Date(person.fødselsdag);
-				clone.querySelector(".birthday").textContent += date.toLocaleDateString();
-				clone.querySelector(".title").textContent += person.titel;
-				clone.querySelector(".hobby").textContent += person.hobby;
+			json.forEach(dish => {
+				const clone = dishTemplate.cloneNode(true);
+				clone.querySelector("img").src = medieurl + dish.billede;
+				clone.querySelector("h2").textContent = dish.navn;
+				clone.querySelector(".short_description").textContent = dish.kortbeskrivelse;
+				clone.querySelector(".price").textContent = `Kr. ${dish.pris},-`;
 				section.appendChild(clone);
 			})
 		}
-
 	</script>
-</body>
-
-</html>
+</body></html>
