@@ -14,6 +14,11 @@
 			width: 100%;
 		}
 
+		button {
+			display: flex;
+			flex-direction: row;
+		}
+
 		#liste {
 			display: grid;
 			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -27,6 +32,11 @@
 			border-radius: 1em;
 		}
 
+		.valgt {
+			background-color: aquamarine;
+			font-style: italic;
+			font-size: 110%;
+		}
 	</style>
 
 </head>
@@ -63,8 +73,18 @@
 
 		// første funktion der kaldes efter DOM er loaded
 		function start() {
-
+			//alle buttons
+			const filterKnapper = document.querySelectorAll("nav button");
+			filterKnapper.forEach(knap => knap.addEventListener("click", filtrerPersoner));
 			loadJSON();
+		}
+
+		//eventlistener knyttet til knapperne vælger det aktive filter
+		function filtrerPersoner() {
+			//sæt variblen "filter" til værdien af data-troende på den klikkede knap
+			filter = this.dataset.troende;
+			//kald funktion visPersoner efter indstilling af nyt filter
+			visPersoner();
 		}
 
 		async function loadJSON() {
@@ -78,10 +98,12 @@
 
 		//funktion der viser personer i liste view
 		function visPersoner() {
-
-			const dest = document.querySelector("#liste"); // container til articles med en person
-			const skabelon = document.querySelector("template").content; // select indhold af html skabelon (article)
-
+			// container til articles med en person
+			const dest = document.querySelector("#liste");
+			// select indhold af html skabelon (article)
+			const skabelon = document.querySelector("template").content;
+			//ryd contaioner inden nyt loop
+			dest.textContent = "";
 			personer.forEach(person => {
 				// loop igennem json (personer)
 				if (filter == person.troende) {
@@ -92,8 +114,5 @@
 				}
 			})
 		}
-
 	</script>
-</body>
-
-</html>
+</body></html>

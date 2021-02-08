@@ -14,6 +14,12 @@
 			width: 100%;
 		}
 
+		nav {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+		}
+
 		#liste {
 			display: grid;
 			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -25,6 +31,12 @@
 			padding: 1em;
 			border: 1px solid;
 			border-radius: 1em;
+		}
+
+		.valgt {
+			background-color: aquamarine;
+			font-style: italic;
+			font-size: 110%;
 		}
 
 	</style>
@@ -63,8 +75,18 @@
 
 		// første funktion der kaldes efter DOM er loaded
 		function start() {
-
+			//alle buttons
+			const filterKnapper = document.querySelectorAll("nav button");
+			filterKnapper.forEach(knap => knap.addEventListener("click", filtrerPersoner));
 			loadJSON();
+		}
+
+		//eventlistener knyttet til knapperne vælger det aktive filter
+		function filtrerPersoner() {
+			//sæt variblen "filter" til værdien af data-troende på den klikkede knap
+			filter = this.dataset.troende;
+			//kald funktion visPersoner efter indstilling af nyt filter
+			visPersoner();
 		}
 
 		async function loadJSON() {
@@ -78,13 +100,16 @@
 
 		//funktion der viser personer i liste view
 		function visPersoner() {
-
-			const dest = document.querySelector("#liste"); // container til articles med en person
-			const skabelon = document.querySelector("template").content; // select indhold af html skabelon (article)
-
+			// container til articles med en person
+			const dest = document.querySelector("#liste");
+			// select indhold af html skabelon (article)
+			const skabelon = document.querySelector("template").content;
+			//ryd contaioner inden nyt loop
+			dest.textContent = "";
 			personer.forEach(person => {
 				// loop igennem json (personer)
-				if (filter == person.troende) {
+				//tjek hvilken tro person har og sammenlign med aktuelt filter, eller vis alle hvis filter har værdien "alle"
+				if (filter == person.troende || filter == "alle") {
 					const klon = skabelon.cloneNode(true);
 					klon.querySelector(".navn").textContent = person.fornavn + " " + person.efternavn;
 					klon.querySelector(".profil-billede").src = medieurl + person.billede;
