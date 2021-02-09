@@ -1,0 +1,53 @@
+* {
+	margin: 0;
+}
+
+img {
+	width: 100%;
+}
+
+main {
+	max-width: 1500px;
+	margin: 0 auto;
+}
+
+section {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	grid-gap: 1rem;
+	padding: 0 1rem;
+}
+
+article {
+	border-style: solid;
+	border-color: #f2c46f;
+	border-radius: 0.5rem;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	line-height: 1.5;
+}
+
+@font-face {
+	font-family: 'russianregular';
+	src: url('russian-webfont.woff2') format('woff2'),
+		url('russian-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+
+}
+
+h1 {
+	padding: 1rem;
+}
+
+h2 {
+	padding: 1rem;
+}
+
+button {}
+
+.selected {
+	background-color: aquamarine;
+	font-style: italic;
+	font-size: 110%;
+}
