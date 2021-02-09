@@ -5,7 +5,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>07_02_01_babushka</title>
-	<link rel="stylesheet" href="">
 	<style>
 		* {
 			margin: 0;
@@ -39,14 +38,39 @@
 		h1 {
 			padding: 1rem;
 		}
-	</style>
-</head>
 
+		h2 {
+			padding: 1rem;
+		}
+
+		button {}
+
+		.selected {
+			background-color: aquamarine;
+			font-style: italic;
+			font-size: 110%;
+		}
+	</style>
+
+
+</head>
 <body>
+	<header>
+		<h2>Alle retter</h2>
+		<nav>
+			<button data-dishes="alle" class="selected">Alle retter</button>
+			<button data-dishes="forretter">Forretter</button>
+			<button data-dishes="hovedretter">Hovedretter</button>
+			<button data-dishes="desserter">Desserter</button>
+			<button data-dishes="drikkevarer">Drikkevarer</button>
+		</nav>
+	</header>
+
+
 	<main>
-		<h1>Bistro Babushka</h1>
 		<section></section>
 	</main>
+
 
 	<template>
 		<article>
@@ -57,9 +81,9 @@
 		</article>
 	</template>
 
-	<script>
-		document.addEventListener("DOMContentLoaded", getData);
 
+	<script>
+		//json data-info
 		const url = "https://babushka-dd8a.restdb.io/rest/menu";
 		const options = {
 			headers: {
@@ -68,27 +92,62 @@
 		};
 		const medieurl = "https://babushka-dd8a.restdb.io/media/";
 
+
+		//variabler og konstanter
+		let dishes;
+
+
+		//hent data, når DOM er loadet
+		document.addEventListener("DOMContentLoaded", getData);
+
 		async function getData() {
+			console.log("getData");
 			const response = await fetch(url, options);
-			const json = await response.json();
-			show(json);
+			dishes = await response.json();
+			start();
 		}
 
-		const section = document.querySelector("section");
-		const dishTemplate = document.querySelector("template").content;
 
-
-		function show(json) {
-			console.log(json);
-
-			json.forEach(dish => {
-				const clone = dishTemplate.cloneNode(true);
-				clone.querySelector("img").src = medieurl + dish.billede;
-				clone.querySelector("h2").textContent = dish.navn;
-				clone.querySelector(".short_description").textContent = dish.kortbeskrivelse;
-				clone.querySelector(".price").textContent = `Kr. ${dish.pris},-`;
-				section.appendChild(clone);
-			})
+		function start() {
+			console.log("start");
+			const filterButtons = document.querySelectorAll("nav button");
+			filterButtons.forEach(button => button.addEventListener("click", filterDishes));
+			showDishes("alle");
 		}
+
+			//eventlistener knyttet til knapperne vælger det aktive filter
+			function filterDishes() {
+				console.log("filterDishes");
+				//sæt variablen "filter" til værdien af data-dishes på den klikkede knap
+				const filter = this.dataset.dishes;
+				//fjern class "selected" fra klikket knap
+				document.querySelector(".selected").classList.remove("selected");
+				//tilføj class "selected" til klikket knap
+				this.classList.add("selected")
+				//kald funktion showDishes efter indstilling af nyt filter
+				const h2_header = document.querySelector("header h2");
+				showDishes(filter);
+				h2_header.textContent = this.textContent;
+			}
+
+
+			//funktion der viser retter i liste-view
+			function showDishes(filter) {
+				console.log("showDishes");
+				const section = document.querySelector("section");
+				section.textContent = "";
+				dishes.forEach(dish => {
+					if (filter == dish.kategori || filter == "alle") {
+						const dishTemplate = document.querySelector("template").content;
+						const clone = dishTemplate.cloneNode(true);
+						clone.querySelector("img").src = medieurl + dish.billede;
+						clone.querySelector("h2").textContent = dish.navn;
+						clone.querySelector(".short_description").textContent = dish.kortbeskrivelse;
+						clone.querySelector(".price").textContent = `Kr. ${dish.pris},-`;
+						section.appendChild(clone);
+					}
+				})
+			}
 	</script>
+
 </body></html>

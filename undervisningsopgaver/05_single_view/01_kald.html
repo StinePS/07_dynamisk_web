@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+
+		img {
+			width: 100%;
+		}
+
+		nav {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+		}
+
+		h1 {
+			font-size: 2rem;
+		}
+
+		#liste {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+			grid-gap: 1em;
+			margin: 2em;
+		}
+
+		.person {
+			padding: 1em;
+			border: 1px solid;
+			border-radius: 1em;
+		}
+
+		.valgt {
+			background-color: aquamarine;
+			font-style: italic;
+			font-size: 110%;
+		}
+
+	</style>
+
+</head>
+
+<body>
+	<header>
+		<h1>Alle</h1>
+		<nav>
+			<button data-troende="alle" class="valgt">Alle</button>
+			<button data-troende="ja">Troende</button>
+			<button data-troende="nej">Ikke troende</button>
+			<button data-troende="tvivler">Tvivler</button>
+		</nav>
+	</header>
+	<section id="liste"></section>
+
+	<template>
+		<article class="person">
+			<h2 class="navn"></h2>
+			<p class="køn"></p>
+			<img src="" alt="" class="profil-billede">
+		</article>
+	</template>
+
+
+	<script>
+		const header = document.querySelector("header h1");
+		const medieurl = "https://persongalleri-5d3e.restdb.io/media/";
+		const myHeaders = {
+
+			"x-apikey": "600fe9211346a1524ff12e31"
+		}
+		document.addEventListener("DOMContentLoaded", start)
+		let personer;
+		let filter = "ja";
+
+
+		// første funktion der kaldes efter DOM er loaded
+		function start() {
+			//alle buttons
+			const filterKnapper = document.querySelectorAll("nav button");
+			filterKnapper.forEach(knap => knap.addEventListener("click", filtrerPersoner));
+			loadJSON();
+		}
+
+		//header henviser til h1, som skal ændre sig ved klik
+		const overskrift = document.querySelector("header h1");
+
+		//eventlistener knyttet til knapperne vælger det aktive filter
+		function filtrerPersoner() {
+			//sæt variblen "filter" til værdien af data-troende på den klikkede knap
+			filter = this.dataset.troende;
+			//fjern class = valgt fra klikket knap
+			document.querySelector(".valgt").classList.remove("valgt");
+			//tilføj class = valgt til klikket knap
+			this.classList.add("valgt")
+			//kald funktion visPersoner efter indstilling af nyt filter
+			visPersoner();
+			overskrift.textContent = this.textContent;
+			console.log(this);
+		}
+
+		async function loadJSON() {
+			const JSONData = await fetch("https://persongalleri-5d3e.restdb.io/rest/persongalleri", {
+				headers: myHeaders
+			});
+			personer = await JSONData.json();
+			console.log("Personer", personer);
+			visPersoner();
+		}
+
+		//funktion der viser personer i liste view
+		function visPersoner() {
+			// container til articles med en person
+			const dest = document.querySelector("#liste");
+			// select indhold af html skabelon (article)
+			const skabelon = document.querySelector("template").content;
+			//ryd contaioner inden nyt loop
+			dest.textContent = "";
+			personer.forEach(person => {
+				// loop igennem json (personer)
+				//tjek hvilken tro person har og sammenlign med aktuelt filter, eller vis alle hvis filter har værdien "alle"
+				if (filter == person.troende || filter == "alle") {
+					const klon = skabelon.cloneNode(true);
+					klon.querySelector(".navn").textContent = person.fornavn + " " + person.efternavn;
+					klon.querySelector(".profil-billede").src = medieurl + person.billede;
+					klon.querySelector(".person").addEventListener("click", () => visDetaljer(person));
+					dest.appendChild(klon);
+				}
+			})
+		}
+
+		function visDetaljer(hvem) {
+			console.log("visDetaljer");
+			location.href = `02_detalje.html?id=${hvem._id}`;
+		}
+
+	</script>
+</body>
+
+</html>
