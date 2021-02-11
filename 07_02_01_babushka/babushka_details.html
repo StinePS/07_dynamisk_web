@@ -9,17 +9,21 @@
 </head>
 
 <body>
-	<section id="section_details">
-		<article id="text_details" class="dish_article splash">
-			<div id="img_details"><img src="" alt=""></div>
-			<div>
-				<h2 class="dish_name"></h2>
-				<p class="long_description"></p>
-				<p class="price">Pris: </p>
-			</div>
-		</article>
-	</section>
-	<button>Tilbage</button>
+	<main>
+		<section id="section_details" class="loading">
+			<article id="text_details" class="dish_article splash">
+				<div id="img_details"><img src="" alt=""></div>
+				<div>
+					<h2 class="dish_name"></h2>
+					<p class="long_description"></p>
+					<p class="price"></p>
+					<button>Tilbage</button>
+				</div>
+			</article>
+		</section>
+		<div class="loader">Henter indhold...</div>
+	</main>
+
 
 	<script>
 		//hent url-parameter fra forsiden
@@ -48,6 +52,7 @@
 		}
 
 		function showDish() {
+			document.querySelector(".loading").classList.remove("loading");
 			document.querySelector("h2").textContent = dish.navn;
 			document.querySelector("img").src = medieurl + dish.billede;
 			document.querySelector(".long_description").textContent = dish.langbeskrivelse;
@@ -58,8 +63,5 @@
 		function goBackToFrontpage() {
 			history.back();
 		}
-
 	</script>
-</body>
-
-</html>
+</body></html>

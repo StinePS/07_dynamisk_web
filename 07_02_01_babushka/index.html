@@ -32,7 +32,8 @@
 
 	<main>
 		<h2>Alle retter</h2>
-		<section id="gallery"></section>
+		<section id="gallery" class="loading"></section>
+		<div class="loader">Henter indhold...</div>
 	</main>
 
 
@@ -41,7 +42,7 @@
 			<img src="" alt="">
 			<h3 class="dish_name"></h3>
 			<p class="short_description"></p>
-			<p class="price">Pris: </p>
+			<p class="price"></p>
 		</article>
 	</template>
 
@@ -78,11 +79,12 @@
 			window.onscroll = function() {
 				stickyScroll()
 			};
-			let navbar = document.querySelector("nav");
+			let navbar = document.querySelector("header");
 			let sticky = navbar.offsetTop;
 
 			function stickyScroll() {
-				if (window.pageYOffset >= sticky) {
+				console.log(navbar.offsetTop)
+				if (window.pageYOffset >= navbar.offsetTop) {
 					navbar.classList.add("sticky");
 				} else {
 					navbar.classList.remove("sticky");
@@ -133,9 +135,6 @@
 		function showDetails(singleView) {
 			location.href = `babushka_details.html?id=${singleView._id}`;
 		}
-
 	</script>
 
-</body>
-
-</html>
+</body></html>

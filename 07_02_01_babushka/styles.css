@@ -7,16 +7,20 @@ img {
 	width: 100%;
 }
 
+header {
+	position: sticky;
+	top: 0;
+}
+
 nav {
 	background-color: #fff;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	flex-wrap: wrap;
 }
 
 .sticky {
-	position: fixed;
-	top: 0;
 	width: 100%;
 	box-shadow: 0px 5px 7px 0px rgba(2, 64, 18, 0.8);
 }
@@ -28,10 +32,21 @@ button {
 	border-color: #024012;
 	box-shadow: 5px 5px 7px 0px rgba(2, 64, 18, 0.8);
 	margin: 1rem;
-	padding: 0.5rem;
+	padding: 0.5rem 1rem;
 	font-family: sans-serif;
+	font-size: 1rem;
 	text-transform: uppercase;
 	letter-spacing: 0.1rem;
+}
+
+button:hover {
+	background-color: #024012;
+	color: #fff;
+}
+
+.selected {
+	background-color: #024012;
+	color: #fff;
 }
 
 main {
@@ -40,10 +55,14 @@ main {
 }
 
 section {
+	padding: 0 1rem;
+}
+
+#gallery {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	grid-gap: 1rem;
-	padding: 0 1rem;
+
 }
 
 article {
@@ -54,6 +73,29 @@ article {
 	margin-bottom: 1rem;
 	line-height: 1.5;
 }
+
+.long_description {
+	max-width: 50ch;
+}
+
+.loading {
+	display: none;
+}
+
+.loader {
+	display: none;
+}
+
+.loading + .loader {
+	display: block;
+	font-family: 'russianregular';
+	font-size: 3rem;
+	color: #024012;
+	text-align: center;
+	padding: 5rem;
+
+}
+
 
 /* FONTS & STYLING */
 @font-face {
@@ -79,28 +121,45 @@ h2 {
 	padding: 1rem;
 }
 
-/* CLASSES */
-.selected {
-	background-color: #024012;
-	color: #fff;
+h3 {
+	color: #024012;
+	font-size: 1.4rem;
 }
 
-.splash {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(3, 1fr; )
+p {
+	color: #024012;
+	font-size: 1.2rem;
 }
 
-#text_main {
-	position: relative;
-	grid-column: 1 / 2;
-	grid-row: 2 / 3;
+#splash {
+	display: none;
+
 }
 
-#img_main {
-	object-fit: cover;
-	grid-column: 2 / 3;
-	grid-row: 1 / 4;
+
+@media (min-width: 768px) {
+	.splash {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	#text_main {
+		position: relative;
+		grid-column: 1 / 2;
+		grid-row: 2 / 3;
+	}
+
+	#img_main {
+		object-fit: cover;
+		grid-column: 2 / 3;
+		grid-row: 1 / 4;
+	}
+
+	#splash {
+		display: block;
+		object-fit: contain;
+		object-position: bottom;
+	}
 }
 
 #section_details {
@@ -110,5 +169,3 @@ h2 {
 #text_details p {
 	padding: 1rem;
 }
-
-#img_details {}
